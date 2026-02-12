@@ -123,6 +123,8 @@ public class QueriesDB {
         // Usamos una variable interna en el XPath ($attr) y la pasamos en la cláusula PASSING
         String sqlInstancesFound = "SELECT "
                 + " t.name AS instancia, "
+                + " t.display_name AS leyendamostrar, "
+                + " t.description AS descriptioninst, "
                 + " x.target_field AS campo_en_target, "
                 + " x.display_name AS etiqueta_visible, "
                 + " x.es_provisionable AS aprovisionamiento, "
@@ -146,6 +148,8 @@ public class QueriesDB {
                 while (rs.next()) {
                     InstancePlainOIM instanceFound = new InstancePlainOIM();
                     instanceFound.setInstance(rs.getString("instancia"));
+                    instanceFound.setLeyenda(rs.getString("leyendamostrar"));
+                    instanceFound.setDesc(rs.getString("descriptioninst"));
                     instanceFound.setAttributeTarget(rs.getString("campo_en_target"));
                     instanceFound.setLabelForm(rs.getString("etiqueta_visible"));
                     instanceFound.setAprov(Boolean.parseBoolean(rs.getString("aprovisionamiento")));

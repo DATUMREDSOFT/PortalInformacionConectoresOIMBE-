@@ -12,6 +12,8 @@ package gob.sv.portalinformacionconectores.data;
 public class InstancePlainOIM {
     
     public String instance;
+    public String leyenda;
+    public String desc;
     public String attributeTarget;
     public String labelForm;
     public boolean aprov;
@@ -56,7 +58,21 @@ public class InstancePlainOIM {
     public void setRecon(boolean recon) {
         this.recon = recon;
     }
-    
-    
+
+    public String getLeyenda() {
+        return leyenda;
+    }
+
+    public void setLeyenda(String leyenda) {
+        this.leyenda = leyenda;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
     
 }
