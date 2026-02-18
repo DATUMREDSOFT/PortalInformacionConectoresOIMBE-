@@ -5,9 +5,11 @@
  */
 package gob.sv.portalinformacionconectores.service;
 
+import gob.sv.portalinformacionconectores.dao.CrudTablesConnectorsDesc;
 import gob.sv.portalinformacionconectores.dao.QueriesDB;
 import gob.sv.portalinformacionconectores.data.AttributesPlainOIM;
 import gob.sv.portalinformacionconectores.data.ConnectorDescription;
+import gob.sv.portalinformacionconectores.data.GenericResponse;
 import gob.sv.portalinformacionconectores.data.InstanceInfoJson;
 import gob.sv.portalinformacionconectores.data.InstancePlainOIM;
 import gob.sv.portalinformacionconectores.data.InstanceTemplate;
@@ -17,6 +19,7 @@ import gob.sv.portalinformacionconectores.parse.OIMMetadataParser;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -89,5 +92,52 @@ public class InstanceInformationService {
         }
 
     }
+    
+    /**Mantenimiento de atributos**/
+    public GenericResponse<String> AttrRecord(AttributesPlainOIM input) throws SQLException{
+      GenericResponse<String> rsAttrRec = new GenericResponse<>();
+      
+      try (Connection con = ConnectionManager.getConnection()) {
+          CrudTablesConnectorsDesc c = new CrudTablesConnectorsDesc();
+          c.insertAttribute(con, input);
+          
+          rsAttrRec.setState("SUCCESS");
+          rsAttrRec.setData(Arrays.asList(""));
+          rsAttrRec.setMessages(Arrays.asList(""));
+      }
+      
+      return rsAttrRec;
+    }
+    
+    public GenericResponse<String> AttrUpdate(AttributesPlainOIM inputUpdate) throws SQLException{
+      GenericResponse<String> rsAttrUp = new GenericResponse<>();
+      
+      try (Connection con = ConnectionManager.getConnection()) {
+          CrudTablesConnectorsDesc c = new CrudTablesConnectorsDesc();
+          c.updateAttribute(con, inputUpdate);
+          
+          rsAttrUp.setState("SUCCESS");
+          rsAttrUp.setData(Arrays.asList(""));
+          rsAttrUp.setMessages(Arrays.asList(""));
+      }
+      
+      return rsAttrUp;
+    }
+    
+    public GenericResponse<String> AttrDelete(int DeleteId) throws SQLException{
+      GenericResponse<String> rsAttrDel = new GenericResponse<>();
+      
+      try (Connection con = ConnectionManager.getConnection()) {
+          CrudTablesConnectorsDesc c = new CrudTablesConnectorsDesc();
+          c.deleteAttribute(con, DeleteId);
+          
+          rsAttrDel.setState("SUCCESS");
+          rsAttrDel.setData(Arrays.asList(""));
+          rsAttrDel.setMessages(Arrays.asList(""));
+      }
+      
+      return rsAttrDel;
+    }
+    
 
 }
